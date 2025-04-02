@@ -20,7 +20,8 @@ metadata_muestras <- read_excel("metadatamuestra.xlsx")
 metadata_carac<- read_excel("metadatacarac.xlsx")
 library(readr)
 dataset <- as.data.frame(dataset)
-rownames(dataset)<-make.unique(dataset[,1]) #Ajustamos la dimensión de los datos para manipularlos posteriormente
+rownames(dataset)<-make.unique(dataset[,1]) #Ajustamos la dimensión de los datos
+                                            #para manipularlos posteriormente
 dataset<-dataset[,-1]
 ```
 
@@ -54,7 +55,8 @@ Para facilitar la manipulación de los datos y metadatos del dataset se ha cread
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(SummarizedExperiment)
-data_expset<- SummarizedExperiment(assays=list(counts=dataset), colData=metadata_muestras, rowData=metadata_carac)
+data_expset<- SummarizedExperiment(assays=list(counts=dataset),
+colData=metadata_muestras, rowData=metadata_carac)
 data_expset
 ```
 
@@ -63,4 +65,7 @@ data_expset
 ## Discusión
 
 ## Conclusiones
+
+## Referencias
+https://github.com/joakovm/Villegas_Martinez_Joaquin_PEC1.git
 
