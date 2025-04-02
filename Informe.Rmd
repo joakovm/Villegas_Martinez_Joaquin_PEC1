@@ -1,0 +1,66 @@
+---
+title: "Análisis de datos ómicos"
+author: "Joaquín Villegas"
+date: "2025-03-27"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(repos = c(CRAN = "https://cran.rstudio.com"))
+```
+
+## Tabla de contenidos
+El estudio que he utilizado consiste en un análisis fosfoproteómico cuyos resultados es un set de abundancias normalizadas de señales de espectrometría de masas para más de 1000 fosfopéptidos. A continuación muestro un resumen del contenido del dataset y la metadata una vez preprocesados.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(readxl)
+dataset <- read_excel("dataset1.xlsx")
+metadata_muestras <- read_excel("metadatamuestra.xlsx")
+metadata_carac<- read_excel("metadatacarac.xlsx")
+library(readr)
+dataset <- as.data.frame(dataset)
+rownames(dataset)<-make.unique(dataset[,1]) #Ajustamos la dimensión de los datos para manipularlos posteriormente
+dataset<-dataset[,-1]
+```
+
+
+```{r}
+dim(dataset)
+names(dataset)
+head(dataset, 5)
+```
+
+```{r}
+dim(metadata_muestras)
+names(metadata_muestras)
+head(metadata_muestras, 5)
+```
+
+```{r}
+dim(metadata_carac)
+names(metadata_carac)
+head(metadata_carac, 5)
+```
+
+## Abstract
+
+## Objetivos
+El objetivo general de este análisis es familirizarse con el uso de SummarizedExperiment, el workflow general del análisis de los datos ómicos, así como el uso de GitHub y Git como herramienta de control de versiones.
+El objetivo conceptual que atañe al dataset escogido es la busqueda de alguna diferencia significativa entre los fosfopéptidos que permita la diferenciación de dos grupos tumorales.
+
+## Métodos
+Para facilitar la manipulación de los datos y metadatos del dataset se ha creado un objeto de clase SummarizedExperiment, extensión de ExpressionSet, de la siguiente forma:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(SummarizedExperiment)
+data_expset<- SummarizedExperiment(assays=list(counts=dataset), colData=metadata_muestras, rowData=metadata_carac)
+data_expset
+```
+
+## Resultados
+
+## Discusión
+
+## Conclusiones
+
